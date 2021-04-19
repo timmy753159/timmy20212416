@@ -63,8 +63,12 @@ def get_ISBN_Price(url):
         priceUl = soup.find('ul',{'class':'price'})
         for liData in liList:
             print("liData\n\n", liData)
-            ######################
-
+            if "ISBN" in liData.text:
+                isbnStr = liData.text[5:]
+        price = priceUl.find('li').text[3:-1]
+        return [isbnStr, price]
+    else:
+        return [None, None]
 
 
 if __name__ == "__main__":
